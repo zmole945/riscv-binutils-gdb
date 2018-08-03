@@ -152,6 +152,13 @@ const struct riscv_opcode riscv_opcodes[] =
 {"jump",      "I",   "c,s", 0, (int) M_CALL,  match_never, INSN_MACRO },
 {"nop",       "C",   "",  MATCH_C_ADDI, 0xffff, match_opcode, INSN_ALIAS },
 {"nop",       "I",   "",         MATCH_ADDI, MASK_ADDI | MASK_RD | MASK_RS1 | MASK_IMM, match_opcode, INSN_ALIAS },
+
+#if 1
+/* OVER instructions */
+{"over",      "I",   "",      MATCH_XOR, MASK_XOR | MASK_RD | MASK_RS1 | MASK_RS2, match_opcode, INSN_ALIAS },
+{"mt",        "I",   "d,s,J", MATCH_MT, MASK_MT, match_opcode, 0 },
+#endif
+
 {"lui",       "C",   "d,Cu",  MATCH_C_LUI, MASK_C_LUI, match_c_lui, INSN_ALIAS },
 {"lui",       "I",   "d,u",  MATCH_LUI, MASK_LUI, match_opcode, 0 },
 {"li",        "C",   "d,Cv",  MATCH_C_LUI, MASK_C_LUI, match_c_lui, INSN_ALIAS },
@@ -622,6 +629,91 @@ const struct riscv_opcode riscv_opcodes[] =
 {"sfence.vma","I",   "s",    MATCH_SFENCE_VMA, MASK_SFENCE_VMA | MASK_RS2, match_opcode, INSN_ALIAS },
 {"sfence.vma","I",   "s,t",  MATCH_SFENCE_VMA, MASK_SFENCE_VMA, match_opcode, 0 },
 {"wfi",       "I",   "",     MATCH_WFI, MASK_WFI, match_opcode, 0 },
+
+#if 1
+{"gfm",             "I",   "d,s,t",  MATCH_GFM,  MASK_GFM, match_opcode, 0 },
+
+{"benes",           "I",   "d,s,J",  MATCH_BENES, MASK_BENES, match_opcode, 0 },
+{"tcm2benes.cfg",   "I",   "J(s)",   MATCH_TCM2BENESCFG, MASK_TCM2BENESCFG, match_opcode, 0 },
+
+{"rsa.mmc",         "I",   "J",      MATCH_RSAMMC, MASK_RSAMMC, match_opcode, 0 },
+
+/* LWH SWH instructions */
+{"lwh",             "I",   "d,o(s)", MATCH_LWH, MASK_LWH, match_opcode, 0 },
+{"swh",             "I",   "t,q(s)", MATCH_SWH, MASK_SWH, match_opcode, 0 },
+
+{"lwtcm",           "I",   "d,J(s)", MATCH_LWTCM, MASK_LWTCM, match_opcode, 0 },
+{"swtcm",           "I",   "t,b(s)", MATCH_SWTCM, MASK_SWTCM, match_opcode, 0 },
+
+/* SBOX instructions */
+{"sboxa.idle",       "I",   "d,s,t", MATCH_SBOXA_IDLE,    MASK_SBOXA_IDLE,     match_opcode, 0 },
+{"sboxa.prexor",     "I",   "d,s,t", MATCH_SBOXA_PREXOR,  MASK_SBOXA_PREXOR,   match_opcode, 0 },
+{"sboxa.postxor",    "I",   "d,s,t", MATCH_SBOXA_POSTXOR, MASK_SBOXA_POSTXOR,  match_opcode, 0 },
+{"sboxai",           "I",   "d,s,t", MATCH_SBOXAI,        MASK_SBOXAI,         match_opcode, 0 },
+{"sboxapr",          "I",   "d,s,t", MATCH_SBOXAPR,       MASK_SBOXAPR,        match_opcode, 0 },
+{"sboxapo",          "I",   "d,s,t", MATCH_SBOXAPO,       MASK_SBOXAPO,        match_opcode, 0 },
+
+{"sboxa.idleslo",    "I",   "d,s,t", MATCH_SBOXA_IDLESLO,    MASK_SBOXA_IDLESLO,     match_opcode, 0 },
+{"sboxa.prexorslo",  "I",   "d,s,t", MATCH_SBOXA_PREXORSLO,  MASK_SBOXA_PREXORSLO,   match_opcode, 0 },
+{"sboxa.postxorslo", "I",   "d,s,t", MATCH_SBOXA_POSTXORSLO, MASK_SBOXA_POSTXORSLO,  match_opcode, 0 },
+{"sboxaislo",        "I",   "d,s,t", MATCH_SBOXAISLO,        MASK_SBOXAISLO,         match_opcode, 0 },
+{"sboxaprslo",       "I",   "d,s,t", MATCH_SBOXAPRSLO,       MASK_SBOXAPRSLO,        match_opcode, 0 },
+{"sboxaposlo",       "I",   "d,s,t", MATCH_SBOXAPOSLO,       MASK_SBOXAPOSLO,        match_opcode, 0 },
+
+{"sboxb.idle",       "I",   "d,s,t", MATCH_SBOXB_IDLE,    MASK_SBOXB_IDLE,     match_opcode, 0 },
+{"sboxb.prexor",     "I",   "d,s,t", MATCH_SBOXB_PREXOR,  MASK_SBOXB_PREXOR,   match_opcode, 0 },
+{"sboxb.postxor",    "I",   "d,s,t", MATCH_SBOXB_POSTXOR, MASK_SBOXB_POSTXOR,  match_opcode, 0 },
+{"sboxbi",           "I",   "d,s,t", MATCH_SBOXBI,        MASK_SBOXBI,         match_opcode, 0 },
+{"sboxbpr",          "I",   "d,s,t", MATCH_SBOXBPR,       MASK_SBOXBPR,        match_opcode, 0 },
+{"sboxbpo",          "I",   "d,s,t", MATCH_SBOXBPO,       MASK_SBOXBPO,        match_opcode, 0 },
+
+{"sboxb.idleslo",    "I",   "d,s,t", MATCH_SBOXB_IDLESLO,    MASK_SBOXB_IDLESLO,     match_opcode, 0 },
+{"sboxb.prexorslo",  "I",   "d,s,t", MATCH_SBOXB_PREXORSLO,  MASK_SBOXB_PREXORSLO,   match_opcode, 0 },
+{"sboxb.postxorslo", "I",   "d,s,t", MATCH_SBOXB_POSTXORSLO, MASK_SBOXB_POSTXORSLO,  match_opcode, 0 },
+{"sboxbislo",        "I",   "d,s,t", MATCH_SBOXBISLO,        MASK_SBOXBISLO,         match_opcode, 0 },
+{"sboxbprslo",       "I",   "d,s,t", MATCH_SBOXBPRSLO,       MASK_SBOXBPRSLO,        match_opcode, 0 },
+{"sboxbposlo",       "I",   "d,s,t", MATCH_SBOXBPOSLO,       MASK_SBOXBPOSLO,        match_opcode, 0 },
+
+{"sbox.idle",       "I",   "d,s,t", MATCH_SBOX_IDLE,    MASK_SBOX_IDLE,     match_opcode, 0 },
+{"sbox.prexor",     "I",   "d,s,t", MATCH_SBOX_PREXOR,  MASK_SBOX_PREXOR,   match_opcode, 0 },
+{"sbox.postxor",    "I",   "d,s,t", MATCH_SBOX_POSTXOR, MASK_SBOX_POSTXOR,  match_opcode, 0 },
+{"sboxi",           "I",   "d,s,t", MATCH_SBOXI,        MASK_SBOXI,         match_opcode, 0 },
+{"sboxpr",          "I",   "d,s,t", MATCH_SBOXPR,       MASK_SBOXPR,        match_opcode, 0 },
+{"sboxpo",          "I",   "d,s,t", MATCH_SBOXPO,       MASK_SBOXPO,        match_opcode, 0 },
+
+/* PU instructions */
+{"pu.ip0",          "I",   "d,s,t", MATCH_PU_IP0,       MASK_PU_IP0,        match_opcode, 0 },
+{"pu.ip1",          "I",   "d,s,t", MATCH_PU_IP1,       MASK_PU_IP1,        match_opcode, 0 },
+{"pu.ipi0",         "I",   "d,s,t", MATCH_PU_IPI0,      MASK_PU_IPI0,       match_opcode, 0 },
+{"pu.ipi1",         "I",   "d,s,t", MATCH_PU_IPI1,      MASK_PU_IPI1,       match_opcode, 0 },
+{"pu.e0",           "I",   "d,s,t", MATCH_PU_E0,        MASK_PU_E0,         match_opcode, 0 },
+{"pu.e1",           "I",   "d,s,t", MATCH_PU_E1,        MASK_PU_E1,         match_opcode, 0 },
+{"pu.p0",           "I",   "d,s,t", MATCH_PU_P0,        MASK_PU_P0,         match_opcode, 0 },
+{"pu.pc00",         "I",   "d,s,t", MATCH_PU_PC00,      MASK_PU_PC00,       match_opcode, 0 },
+{"pu.pc01",         "I",   "d,s,t", MATCH_PU_PC01,      MASK_PU_PC01,       match_opcode, 0 },
+{"pu.pc10",         "I",   "d,s,t", MATCH_PU_PC10,      MASK_PU_PC10,       match_opcode, 0 },
+{"pu.pc11",         "I",   "d,s,t", MATCH_PU_PC11,      MASK_PU_PC11,       match_opcode, 0 },
+{"pu.ls0",          "I",   "d,s,t", MATCH_PU_LS0,       MASK_PU_LS0,        match_opcode, 0 },
+{"pu.ls1",          "I",   "d,s,t", MATCH_PU_LS1,       MASK_PU_LS1,        match_opcode, 0 },
+
+/* GF instructions */
+{"gf.enc",          "I",   "d,s,t", MATCH_GF_ENC,       MASK_GF_ENC,        match_opcode, 0 },
+{"gf.dec",          "I",   "d,s,t", MATCH_GF_DEC,       MASK_GF_DEC,        match_opcode, 0 },
+{"gfe",             "I",   "d,s,t", MATCH_GFE,          MASK_GFE,           match_opcode, 0 },
+{"gfd",             "I",   "d,s,t", MATCH_GFD,          MASK_GFD,           match_opcode, 0 },
+{"gf.sro",          "I",   "d,s,J", MATCH_ALG_SRO,      MASK_ALG_SRO,       match_opcode, 0 },
+{"gfr",             "I",   "d,s,J", MATCH_ALG_SRO,      MASK_ALG_SRO,       match_opcode, 0 },
+
+/* ALG instructions */
+{"alg.sro",         "I",   "d,s,J", MATCH_ALG_SRO,      MASK_ALG_SRO,       match_opcode, 0 },
+
+/* DP instructions */
+{"dp",              "I",   "d,u",   MATCH_DP,           MASK_DP,            match_opcode, 0 },
+/* SRO instructions */
+{"sro",             "I",   "d,s,>", MATCH_SRO,          MASK_SRO,           match_opcode, 0 },
+
+{"alg.srof",        "I",   "d,B",   MATCH_ALG_SROF,     MASK_ALG_SROF,      match_opcode, 0 },
+#endif
 
 /* Terminate the list.  */
 {0, 0, 0, 0, 0, 0, 0}

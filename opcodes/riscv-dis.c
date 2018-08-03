@@ -224,7 +224,10 @@ print_insn_args (const char *d, insn_t l, bfd_vma pc, disassemble_info *info)
 	    print (info->stream, "0");
 	  break;
 
+#if 1
+#else
 	case 'b':
+#endif
 	case 's':
 	  print (info->stream, "%s", riscv_gpr_names[rs1]);
 	  break;
@@ -262,6 +265,26 @@ print_insn_args (const char *d, insn_t l, bfd_vma pc, disassemble_info *info)
 	    maybe_print_address (pd, rs1, EXTRACT_ITYPE_IMM (l));
 	  print (info->stream, "%d", (int)EXTRACT_ITYPE_IMM (l));
 	  break;
+#if 1
+	case 'J':
+	  if (((l & MASK_ADDI) == MATCH_ADDI && rs1 != 0)
+	      || (l & MASK_JALR) == MATCH_JALR)
+	    maybe_print_address (pd, rs1, EXTRACT_ITYPE_IMM (l));
+	  print (info->stream, "0x%3.3x", (0x00000fff&(uint32_t)EXTRACT_ITYPE_IMM (l)));
+	  break;
+
+	case 'B':
+	  if (((l & MASK_ADDI) == MATCH_ADDI && rs1 != 0)
+	      || (l & MASK_JALR) == MATCH_JALR)
+	    maybe_print_address (pd, rs1, EXTRACT_ITYPE_IMM (l));
+	  print (info->stream, "0x%5.5x", (0x0001ffff&(uint32_t)EXTRACT_BTYPE_IMM (l)));
+	  break;
+
+	case 'b':
+	  maybe_print_address (pd, rs1, EXTRACT_STYPE_IMM (l));
+	  print (info->stream, "0x%3.3x", (0x00000fff&(uint32_t)EXTRACT_STYPE_IMM (l)));
+	  break;
+#endif
 
 	case 'q':
 	  maybe_print_address (pd, rs1, EXTRACT_STYPE_IMM (l));

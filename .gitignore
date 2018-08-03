@@ -59,3 +59,10 @@ stamp-*
 /mpc*
 /gmp*
 /isl*
+
+tags
+cscope.in.out
+cscope.out
+cscope.po.out
+*.swp
+*.swo

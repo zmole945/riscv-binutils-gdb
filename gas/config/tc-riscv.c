@@ -564,6 +564,11 @@ validate_riscv_insn (const struct riscv_opcode *opc)
       case 'Q':	USE_BITS (OP_MASK_SUCC,		OP_SH_SUCC); break;
       case 'o':
       case 'j': used_bits |= ENCODE_ITYPE_IMM (-1U); break;
+#if 1
+      case 'J': used_bits |= ENCODE_ITYPE_IMM (-1U); break;
+      case 'B': used_bits |= ENCODE_BTYPE_IMM (-1U); break;
+      case 'b': used_bits |= ENCODE_STYPE_IMM (-1U); break;
+#endif
       case 'a':	used_bits |= ENCODE_UJTYPE_IMM (-1U); break;
       case 'p':	used_bits |= ENCODE_SBTYPE_IMM (-1U); break;
       case 'q':	used_bits |= ENCODE_STYPE_IMM (-1U); break;
@@ -664,6 +669,11 @@ riscv_apply_const_reloc (bfd_reloc_code_real_type reloc_type, bfd_vma value)
 
     case BFD_RELOC_RISCV_LO12_I:
       return ENCODE_ITYPE_IMM (value);
+
+#if 1
+    case BFD_RELOC_RISCV_LO17_I:
+      return ENCODE_BTYPE_IMM (value);
+#endif
 
     default:
       abort ();
@@ -1043,6 +1053,9 @@ static const struct percent_op_match percent_op_utype[] =
 static const struct percent_op_match percent_op_itype[] =
 {
   {"%lo", BFD_RELOC_RISCV_LO12_I},
+#if 1
+  {"%lo", BFD_RELOC_RISCV_LO17_I},
+#endif
   {"%tprel_lo", BFD_RELOC_RISCV_TPREL_LO12_I},
   {"%pcrel_lo", BFD_RELOC_RISCV_PCREL_LO12_I},
   {0, 0}
@@ -1588,6 +1601,21 @@ rvc_lui:
 	      *imm_reloc = BFD_RELOC_RISCV_LO12_I;
 	      p = percent_op_itype;
 	      goto alu_op;
+#if 1
+	    case 'J': /* Unsign-extended immediate.  */
+	      *imm_reloc = BFD_RELOC_RISCV_LO12_I;
+	      p = percent_op_itype;
+	      goto alu_op_unsigned;
+	    case 'B': /* Unsign-extended immediate.  */
+	      *imm_reloc = BFD_RELOC_RISCV_LO17_I;
+	      p = percent_op_itype;
+	      goto bimm;
+              continue;
+	    case 'b':
+	      p = percent_op_stype;
+	      *imm_reloc = BFD_RELOC_RISCV_LO12_S;
+	      goto load_store_uimm;
+#endif
 	    case 'q': /* Store displacement.  */
 	      p = percent_op_stype;
 	      *imm_reloc = BFD_RELOC_RISCV_LO12_S;
@@ -1599,6 +1627,30 @@ rvc_lui:
 	    case '0': /* AMO "displacement," which must be zero.  */
 	      p = percent_op_rtype;
 	      *imm_reloc = BFD_RELOC_UNUSED;
+#if 1
+load_store_uimm:
+	      /* Check whether there is only a single bracketed expression
+		 left.  If so, it must be the base register and the
+		 constant must be zero.  */
+	      imm_expr->X_op = O_constant;
+	      imm_expr->X_add_number = 0;
+	      if (*s == '(' && strchr (s + 1, '(') == 0)
+		continue;
+
+	      if (!my_getSmallExpression (imm_expr, imm_reloc, s, p))
+		{
+		  normalize_constant_expr (imm_expr);
+		  if (imm_expr->X_op != O_constant
+		      || (*args == '0' && imm_expr->X_add_number != 0)
+		      || imm_expr->X_add_number >= (signed)RISCV_IMM_REACH
+		      || imm_expr->X_add_number < 0)
+		    break;
+		}
+
+	      s = expr_end;
+	      continue;
+#endif
+
 load_store:
 	      /* Check whether there is only a single bracketed expression
 		 left.  If so, it must be the base register and the
@@ -1607,6 +1659,7 @@ load_store:
 	      imm_expr->X_add_number = 0;
 	      if (*s == '(' && strchr (s + 1, '(') == 0)
 		continue;
+
 alu_op:
 	      /* If this value won't fit into a 16 bit offset, then go
 		 find a macro that will generate the 32 bit offset
@@ -1623,7 +1676,40 @@ alu_op:
 
 	      s = expr_end;
 	      continue;
+#if 1
+alu_op_unsigned:
+	      /* If this value won't fit into a 16 bit offset, then go
+		 find a macro that will generate the 32 bit offset
+		 code pattern.  */
+	      if (!my_getSmallExpression (imm_expr, imm_reloc, s, p))
+		{
+		  normalize_constant_expr (imm_expr);
+		  if (imm_expr->X_op != O_constant
+		      || (*args == '0' && imm_expr->X_add_number != 0)
+		      || imm_expr->X_add_number >= (signed)RISCV_IMM_REACH
+		      || imm_expr->X_add_number < 0)
+		    break;
+		}
 
+	      s = expr_end;
+	      continue;
+bimm:
+	      /* If this value won't fit into a 16 bit offset, then go
+		 find a macro that will generate the 32 bit offset
+		 code pattern.  */
+	      if (!my_getSmallExpression (imm_expr, imm_reloc, s, p))
+		{
+		  normalize_constant_expr (imm_expr);
+		  if (imm_expr->X_op != O_constant
+		      || (*args == '0' && imm_expr->X_add_number != 0)
+		      || imm_expr->X_add_number >= (signed)RISCV_BIMM_REACH
+		      || imm_expr->X_add_number < 0)
+		    break;
+		}
+
+	      s = expr_end;
+	      continue;
+#endif
 	    case 'p':		/* PC-relative offset.  */
 branch:
 	      *imm_reloc = BFD_RELOC_12_PCREL;
@@ -1868,6 +1954,9 @@ md_apply_fix (fixS *fixP, valueT *valP, segT seg ATTRIBUTE_UNUSED)
   switch (fixP->fx_r_type)
     {
     case BFD_RELOC_RISCV_HI20:
+#if 1
+    case BFD_RELOC_RISCV_LO17_I:
+#endif
     case BFD_RELOC_RISCV_LO12_I:
     case BFD_RELOC_RISCV_LO12_S:
       bfd_putl32 (riscv_apply_const_reloc (fixP->fx_r_type, *valP)

@@ -499,6 +499,148 @@
 #define MASK_CUSTOM3_RD_RS1  0x707f
 #define MATCH_CUSTOM3_RD_RS1_RS2 0x707b
 #define MASK_CUSTOM3_RD_RS1_RS2  0x707f
+
+#if 1
+#define MASK_GFM            0xfe00707f
+#define MATCH_GFM           0x105b
+
+#define MATCH_BENES         0x702b
+#define MASK_BENES          0x707f
+
+#define MATCH_TCM2BENESCFG  0x1007
+#define MASK_TCM2BENESCFG   0x7fff
+
+#define MATCH_RSAMMC        0x04007
+#define MASK_RSAMMC         0xfffff
+
+#define MATCH_MT             0x7003
+#define MASK_MT              0x707f
+
+#define MATCH_LWH            0x2003
+#define MASK_LWH             0x707f
+#define MATCH_SWH            0x2023
+#define MASK_SWH             0x707f
+
+#define MATCH_LWTCM          0x3003
+#define MASK_LWTCM           0x707f
+#define MATCH_SWTCM          0x3023
+#define MASK_SWTCM           0x707f
+
+#define MATCH_SBOXA_IDLE     0x100b
+#define MASK_SBOXA_IDLE      0xfe00707f
+#define MATCH_SBOXA_PREXOR   0x200b
+#define MASK_SBOXA_PREXOR    0xfe00707f
+#define MATCH_SBOXA_POSTXOR  0x400b
+#define MASK_SBOXA_POSTXOR   0xfe00707f
+#define MATCH_SBOXAI         0x100b
+#define MASK_SBOXAI          0xfe00707f
+#define MATCH_SBOXAPR        0x200b
+#define MASK_SBOXAPR         0xfe00707f
+#define MATCH_SBOXAPO        0x400b
+#define MASK_SBOXAPO         0xfe00707f
+
+#define MATCH_SBOXA_IDLESLO     0x300b
+#define MASK_SBOXA_IDLESLO      0xfe00707f
+#define MATCH_SBOXA_PREXORSLO   0x600b
+#define MASK_SBOXA_PREXORSLO    0xfe00707f
+#define MATCH_SBOXA_POSTXORSLO  0x500b
+#define MASK_SBOXA_POSTXORSLO   0xfe00707f
+#define MATCH_SBOXAISLO         0x300b
+#define MASK_SBOXAISLO          0xfe00707f
+#define MATCH_SBOXAPRSLO        0x600b
+#define MASK_SBOXAPRSLO         0xfe00707f
+#define MATCH_SBOXAPOSLO        0x500b
+#define MASK_SBOXAPOSLO         0xfe00707f
+
+#define MATCH_SBOXB_IDLE     0x0200100b
+#define MASK_SBOXB_IDLE      0xfe00707f
+#define MATCH_SBOXB_PREXOR   0x0200200b
+#define MASK_SBOXB_PREXOR    0xfe00707f
+#define MATCH_SBOXB_POSTXOR  0x0200400b
+#define MASK_SBOXB_POSTXOR   0xfe00707f
+#define MATCH_SBOXBI         0x0200100b
+#define MASK_SBOXBI          0xfe00707f
+#define MATCH_SBOXBPR        0x0200200b
+#define MASK_SBOXBPR         0xfe00707f
+#define MATCH_SBOXBPO        0x0200400b
+#define MASK_SBOXBPO         0xfe00707f
+
+#define MATCH_SBOXB_IDLESLO     0x0200300b
+#define MASK_SBOXB_IDLESLO      0xfe00707f
+#define MATCH_SBOXB_PREXORSLO   0x0200600b
+#define MASK_SBOXB_PREXORSLO    0xfe00707f
+#define MATCH_SBOXB_POSTXORSLO  0x0200500b
+#define MASK_SBOXB_POSTXORSLO   0xfe00707f
+#define MATCH_SBOXBISLO         0x0200300b
+#define MASK_SBOXBISLO          0xfe00707f
+#define MATCH_SBOXBPRSLO        0x0200600b
+#define MASK_SBOXBPRSLO         0xfe00707f
+#define MATCH_SBOXBPOSLO        0x0200500b
+#define MASK_SBOXBPOSLO         0xfe00707f
+
+#define MATCH_SBOX_IDLE     0x100b
+#define MASK_SBOX_IDLE      0xfe00707f
+#define MATCH_SBOX_PREXOR   0x200b
+#define MASK_SBOX_PREXOR    0xfe00707f
+#define MATCH_SBOX_POSTXOR  0x400b
+#define MASK_SBOX_POSTXOR   0xfe00707f
+#define MATCH_SBOXI         0x100b
+#define MASK_SBOXI          0xfe00707f
+#define MATCH_SBOXPR        0x200b
+#define MASK_SBOXPR         0xfe00707f
+#define MATCH_SBOXPO        0x400b
+#define MASK_SBOXPO         0xfe00707f
+
+
+#define MATCH_PU_IP0         0x0000302b
+#define MASK_PU_IP0          0xfe00707f
+#define MATCH_PU_IP1         0x0200302b
+#define MASK_PU_IP1          0xfe00707f
+#define MATCH_PU_IPI0        0x0400302b
+#define MASK_PU_IPI0         0xfe00707f
+#define MATCH_PU_IPI1        0x0600302b
+#define MASK_PU_IPI1         0xfe00707f
+#define MATCH_PU_E0          0x0800302b
+#define MASK_PU_E0           0xfe00707f
+#define MATCH_PU_E1          0x0a00302b
+#define MASK_PU_E1           0xfe00707f
+#define MATCH_PU_P0          0x0c00302b
+#define MASK_PU_P0           0xfe00707f
+#define MATCH_PU_PC00        0x0e00302b
+#define MASK_PU_PC00         0xfe00707f
+#define MATCH_PU_PC01        0x1000302b
+#define MASK_PU_PC01         0xfe00707f
+#define MATCH_PU_PC10        0x1200302b
+#define MASK_PU_PC10         0xfe00707f
+#define MATCH_PU_PC11        0x1400302b
+#define MASK_PU_PC11         0xfe00707f
+#define MATCH_PU_LS0         0x1600302b
+#define MASK_PU_LS0          0xfe00707f
+#define MATCH_PU_LS1         0x1800302b
+#define MASK_PU_LS1          0xfe00707f
+
+#define MATCH_GF_ENC        0x102b
+#define MASK_GF_ENC         0xfe00707f
+#define MATCH_GF_DEC        0x202b
+#define MASK_GF_DEC         0xfe00707f
+#define MATCH_GFE           0x102b
+#define MASK_GFE            0xfe00707f
+#define MATCH_GFD           0x202b
+#define MASK_GFD            0xfe00707f
+
+#define MATCH_ALG_SRO       0x402b
+#define MASK_ALG_SRO        0x707f
+
+#define MATCH_ALG_SROF      0x502b
+#define MASK_ALG_SROF       0x707f
+
+#define MATCH_DP            0x57
+#define MASK_DP             0x7f
+
+#define MATCH_SRO           0x4005013
+#define MASK_SRO            0xfe00707f
+#endif
+
 #define CSR_FFLAGS 0x1
 #define CSR_FRM 0x2
 #define CSR_FCSR 0x3
@@ -975,6 +1117,88 @@ DECLARE_INSN(custom3_rs1_rs2, MATCH_CUSTOM3_RS1_RS2, MASK_CUSTOM3_RS1_RS2)
 DECLARE_INSN(custom3_rd, MATCH_CUSTOM3_RD, MASK_CUSTOM3_RD)
 DECLARE_INSN(custom3_rd_rs1, MATCH_CUSTOM3_RD_RS1, MASK_CUSTOM3_RD_RS1)
 DECLARE_INSN(custom3_rd_rs1_rs2, MATCH_CUSTOM3_RD_RS1_RS2, MASK_CUSTOM3_RD_RS1_RS2)
+
+#if 1
+DECLARE_INSN(gfm, MATCH_GFM, MASK_GFM)
+
+DECLARE_INSN(benes, MATCH_BENES, MASK_BENES)
+DECLARE_INSN(tcm2benes_cfg, MATCH_TCM2BENESCFG, MASK_TCM2BENESCFG)
+
+DECLARE_INSN(rsa_mmc, MATCH_RSAMMC, MASK_RSAMMC)
+
+DECLARE_INSN(mt, MATCH_MT, MASK_MT)
+
+DECLARE_INSN(lwh, MATCH_LWH, MASK_LWH)
+DECLARE_INSN(swh, MATCH_SWH, MASK_SWH)
+
+DECLARE_INSN(lwtcm, MATCH_LWTCM, MASK_LWTCM)
+DECLARE_INSN(swtcm, MATCH_SWTCM, MASK_SWTCM)
+
+DECLARE_INSN(sboxa_idle,    MATCH_SBOXA_IDLE,    MASK_SBOXA_IDLE)
+DECLARE_INSN(sboxa_prexor,  MATCH_SBOXA_PREXOR,  MASK_SBOXA_PREXOR)
+DECLARE_INSN(sboxa_postxor, MATCH_SBOXA_POSTXOR, MASK_SBOXA_POSTXOR)
+DECLARE_INSN(sboxai,        MATCH_SBOXAI,        MASK_SBOXAI)
+DECLARE_INSN(sboxapr,       MATCH_SBOXAPR,       MASK_SBOXAPR)
+DECLARE_INSN(sboxapo,       MATCH_SBOXAPO,       MASK_SBOXAPO)
+
+DECLARE_INSN(sboxa_idleslo,    MATCH_SBOXA_IDLESLO,    MASK_SBOXA_IDLESLO)
+DECLARE_INSN(sboxa_prexorslo,  MATCH_SBOXA_PREXORSLO,  MASK_SBOXA_PREXORSLO)
+DECLARE_INSN(sboxa_postxorslo, MATCH_SBOXA_POSTXORSLO, MASK_SBOXA_POSTXORSLO)
+DECLARE_INSN(sboxaislo,        MATCH_SBOXAISLO,        MASK_SBOXAISLO)
+DECLARE_INSN(sboxaprslo,       MATCH_SBOXAPRSLO,       MASK_SBOXAPRSLO)
+DECLARE_INSN(sboxaposlo,       MATCH_SBOXAPOSLO,       MASK_SBOXAPOSLO)
+
+DECLARE_INSN(sboxb_idle,    MATCH_SBOXB_IDLE,    MASK_SBOXB_IDLE)
+DECLARE_INSN(sboxb_prexor,  MATCH_SBOXB_PREXOR,  MASK_SBOXB_PREXOR)
+DECLARE_INSN(sboxb_postxor, MATCH_SBOXB_POSTXOR, MASK_SBOXB_POSTXOR)
+DECLARE_INSN(sboxbi,        MATCH_SBOXBI,        MASK_SBOXBI)
+DECLARE_INSN(sboxbpr,       MATCH_SBOXBPR,       MASK_SBOXBPR)
+DECLARE_INSN(sboxbpo,       MATCH_SBOXBPO,       MASK_SBOXBPO)
+
+DECLARE_INSN(sboxb_idleslo,    MATCH_SBOXB_IDLESLO,    MASK_SBOXB_IDLESLO)
+DECLARE_INSN(sboxb_prexorslo,  MATCH_SBOXB_PREXORSLO,  MASK_SBOXB_PREXORSLO)
+DECLARE_INSN(sboxb_postxorslo, MATCH_SBOXB_POSTXORSLO, MASK_SBOXB_POSTXORSLO)
+DECLARE_INSN(sboxbislo,        MATCH_SBOXBISLO,        MASK_SBOXBISLO)
+DECLARE_INSN(sboxbprslo,       MATCH_SBOXBPRSLO,       MASK_SBOXBPRSLO)
+DECLARE_INSN(sboxbposlo,       MATCH_SBOXBPOSLO,       MASK_SBOXBPOSLO)
+
+DECLARE_INSN(sbox_idle,     MATCH_SBOX_IDLE,    MASK_SBOX_IDLE)
+DECLARE_INSN(sbox_prexor,   MATCH_SBOX_PREXOR,  MASK_SBOX_PREXOR)
+DECLARE_INSN(sbox_postxor,  MATCH_SBOX_POSTXOR, MASK_SBOX_POSTXOR)
+DECLARE_INSN(sboxi,         MATCH_SBOXI,        MASK_SBOXI)
+DECLARE_INSN(sboxpr,        MATCH_SBOXPR,       MASK_SBOXPR)
+DECLARE_INSN(sboxpo,        MATCH_SBOXPO,       MASK_SBOXPO)
+
+DECLARE_INSN(pu_ip0,        MATCH_PU_IP0,       MASK_PU_IP0)
+DECLARE_INSN(pu_ip1,        MATCH_PU_IP1,       MASK_PU_IP1)
+DECLARE_INSN(pu_ipi0,       MATCH_PU_IPI0,      MASK_PU_IPI0)
+DECLARE_INSN(pu_ipi1,       MATCH_PU_IPI1,      MASK_PU_IPI1)
+DECLARE_INSN(pu_e0,         MATCH_PU_E0,        MASK_PU_E0)
+DECLARE_INSN(pu_e1,         MATCH_PU_E1,        MASK_PU_E1)
+DECLARE_INSN(pu_p0,         MATCH_PU_P0,        MASK_PU_P0)
+DECLARE_INSN(pu_pc00,       MATCH_PU_PC00,      MASK_PU_PC00)
+DECLARE_INSN(pu_pc01,       MATCH_PU_PC01,      MASK_PU_PC01)
+DECLARE_INSN(pu_pc10,       MATCH_PU_PC10,      MASK_PU_PC10)
+DECLARE_INSN(pu_pc11,       MATCH_PU_PC11,      MASK_PU_PC11)
+DECLARE_INSN(pu_ls0,        MATCH_PU_LS0,       MASK_PU_LS0)
+DECLARE_INSN(pu_ls1,        MATCH_PU_LS1,       MASK_PU_LS1)
+
+DECLARE_INSN(gf_enc, MATCH_GF_ENC, MASK_GF_ENC)
+DECLARE_INSN(gf_dec, MATCH_GF_DEC, MASK_GF_DEC)
+DECLARE_INSN(gfe, MATCH_GFE, MASK_GFE)
+DECLARE_INSN(gfd, MATCH_GFD, MASK_GFD)
+DECLARE_INSN(gf_sro, MATCH_ALG_SRO, MASK_ALG_SRO)
+DECLARE_INSN(gfr, MATCH_ALG_SRO, MASK_ALG_SRO)
+
+DECLARE_INSN(alg_sro, MATCH_ALG_SRO, MASK_ALG_SRO)
+
+DECLARE_INSN(dp, MATCH_DP, MASK_DP)
+
+DECLARE_INSN(sro, MATCH_SRO, MASK_SRO)
+
+DECLARE_INSN(alg_srof, MATCH_ALG_SROF, MASK_ALG_SROF)
+#endif
+
 #endif
 #ifdef DECLARE_CSR
 DECLARE_CSR(fflags, CSR_FFLAGS)

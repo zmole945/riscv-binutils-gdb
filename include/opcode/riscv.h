@@ -61,6 +61,10 @@ static const char * const riscv_pred_succ[16] =
 #define RV_X(x, s, n)  (((x) >> (s)) & ((1 << (n)) - 1))
 #define RV_IMM_SIGN(x) (-(((x) >> 31) & 1))
 
+#if 1
+#define EXTRACT_BTYPE_IMM(x) \
+  (RV_X(x, 15, 17) | (RV_IMM_SIGN(x) << 17))
+#endif
 #define EXTRACT_ITYPE_IMM(x) \
   (RV_X(x, 20, 12) | (RV_IMM_SIGN(x) << 12))
 #define EXTRACT_STYPE_IMM(x) \
@@ -100,6 +104,10 @@ static const char * const riscv_pred_succ[16] =
 
 #define ENCODE_ITYPE_IMM(x) \
   (RV_X(x, 0, 12) << 20)
+#if 1
+#define ENCODE_BTYPE_IMM(x) \
+  (RV_X(x, 0, 17) << 15)
+#endif
 #define ENCODE_STYPE_IMM(x) \
   ((RV_X(x, 0, 5) << 7) | (RV_X(x, 5, 7) << 25))
 #define ENCODE_SBTYPE_IMM(x) \
@@ -191,6 +199,10 @@ static const char * const riscv_pred_succ[16] =
 #define RISCV_BRANCH_ALIGN (1 << RISCV_BRANCH_ALIGN_BITS)
 #define RISCV_BRANCH_REACH (RISCV_IMM_REACH * RISCV_BRANCH_ALIGN)
 
+#if 1
+#define RISCV_BIMM_BITS 17
+#define RISCV_BIMM_REACH (1LL << RISCV_BIMM_BITS)
+#endif
 /* RV fields.  */
 
 #define OP_MASK_OP		0x7f

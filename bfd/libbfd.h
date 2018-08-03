@@ -2167,6 +2167,9 @@ static const char *const bfd_reloc_code_real_names[] = { "@@uninitialized@@",
   "BFD_RELOC_RISCV_PCREL_HI20",
   "BFD_RELOC_RISCV_PCREL_LO12_I",
   "BFD_RELOC_RISCV_PCREL_LO12_S",
+#if 1
+  "BFD_RELOC_RISCV_LO17_I",
+#endif
   "BFD_RELOC_RISCV_LO12_I",
   "BFD_RELOC_RISCV_LO12_S",
   "BFD_RELOC_RISCV_GPREL12_I",
