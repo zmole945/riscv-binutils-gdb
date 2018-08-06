@@ -79,6 +79,9 @@ case "${target}" in
    riscv*-*-*)
        SIM_ARCH(riscv)
        ;;
+   rpu*-*-*)
+       SIM_ARCH(riscv)
+       ;;
    rl78-*-*)
        SIM_ARCH(rl78)
        ;;

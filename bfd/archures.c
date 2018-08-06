@@ -632,6 +632,7 @@ extern const bfd_arch_info_type bfd_plugin_arch;
 extern const bfd_arch_info_type bfd_powerpc_archs[];
 #define bfd_powerpc_arch bfd_powerpc_archs[0]
 extern const bfd_arch_info_type bfd_riscv_arch;
+extern const bfd_arch_info_type bfd_rpu_arch;
 extern const bfd_arch_info_type bfd_rs6000_arch;
 extern const bfd_arch_info_type bfd_rl78_arch;
 extern const bfd_arch_info_type bfd_rx_arch;
@@ -722,6 +723,7 @@ static const bfd_arch_info_type * const bfd_archures_list[] =
     &bfd_pdp11_arch,
     &bfd_powerpc_arch,
     &bfd_riscv_arch,
+    &bfd_rpu_arch,
     &bfd_rl78_arch,
     &bfd_rs6000_arch,
     &bfd_rx_arch,

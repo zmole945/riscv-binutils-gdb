@@ -655,6 +655,7 @@ mn10300
 moxie
 msp430
 riscv
+rpu
 rl78
 rx
 sh64
@@ -3770,6 +3771,13 @@ subdirs="$subdirs aarch64"
 
        ;;
    riscv*-*-*)
+
+  sim_arch=riscv
+  subdirs="$subdirs riscv"
+
+
+       ;;
+   rpu*-*-*)
 
   sim_arch=riscv
   subdirs="$subdirs riscv"

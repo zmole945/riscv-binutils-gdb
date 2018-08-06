@@ -120,6 +120,7 @@ cpu-pj.c
 cpu-plugin.c
 cpu-powerpc.c
 cpu-riscv.c
+cpu-rpu.c
 cpu-rl78.c
 cpu-rs6000.c
 cpu-rx.c
