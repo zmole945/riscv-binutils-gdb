@@ -380,6 +380,11 @@ disassembler (bfd *abfd)
       disassemble = print_insn_riscv;
       break;
 #endif
+#ifdef ARCH_rpu
+    case bfd_arch_riscv:
+      disassemble = print_insn_riscv;
+      break;
+#endif
 #ifdef ARCH_rs6000
     case bfd_arch_rs6000:
       if (bfd_get_mach (abfd) == bfd_mach_ppc_620)
